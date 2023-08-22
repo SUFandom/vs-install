@@ -73,11 +73,40 @@ function datetime () {
 }
 
 function extract () {
-    7za x pack/pak.7z.001
+    #7za x pack/pak.7z.001
+    echo "Checking your Device"
+    case $(uname -m) in
+        aarch64)
+            msg "Detected Aarch64, if you are running this on PRoot-termux, then the install may be sucessful but there may be no way to launch it under smooth conditions"
+            7za x pack/ARM64/pak_arm64.7z.001
+            ;;
+        armhf)
+            msg "Detected ARM32, if you are running this on PRoot-termux, then the install may be sucessful but there may be no way to launch it under smooth conditions"
+            7za x pack/ARMHF/pak_armhf.7z.001
+            ;;
+        x86_64)
+            7za x pack/AMD64/pak_amd64.7z.001
+            ;;
+        *)
+            echo "Your Architecture : $(uname -m), is not supported..."
+            sleep 10
+            menu
+            ;;
+    esac
 }
-
 function install () {
-    sudo apt install -y ./pak.deb
+    case $(uname -m) in
+        aarch64)
+            sudo apt install -y ./vs_arm64.deb
+            ;;
+        armhf)
+            sudo apt install -y ./vs_armhf.deb
+            ;;
+        x86_64)
+            sudo apt install -y ./vs_amd64.deb
+            ;;
+    esac        
+    #sudo apt install -y ./pak.deb
 }
 
 function clean () {
@@ -92,6 +121,12 @@ function chk_spc () {
     case $(uname -m) in
         x86_64)
             msg "AVAILABLE for 64 Bit: $(cat pack/VERSION_AMD64)"
+            ;;
+        aarch64)
+            msg "AVAILABLE for ARM64: $(cat pack/VERSION_ARM64)"
+            ;;
+        armhf)
+            msg "Available for ARM7 Hard Float: $(cat pack/VERSION_ARM32)"
             ;;
         *)
             msg "UNAVAILABLE"
@@ -126,7 +161,8 @@ sleep 2
 clear
 
 function welcome () {
-    dialog --infobox "VS Code Installer\n\nNot Related to Microsoft Whatsoever, but here to let you install VS Code anyways..."
+    dialog --infobox "VS Code Installer\n\nNot Related to Microsoft Whatsoever, but here to let you install VS Code anyways..." 0 0 
+    sleep 5
     agree
 }
 
@@ -162,6 +198,10 @@ function menu () {
     esac 
     case $menu in 
         "Install")
+            if [ "$BLOCK" == 1 ]; then
+                dialog --msgbox "Your Host doesn't support VS Code Bundled in to the offline installer..." 0 0
+                menu
+            fi
             clear
             msg "This Process Job is set in Verbose to ensure Stability..."
             msg "Starting Process..."
@@ -178,7 +218,7 @@ function menu () {
             remove 
             ;;
         "About")
-            dialog --backtitle "About" --title "VS Code Installer About" --msgbox "VS Code Package Manager by SUFandom\n\nVersion 1\n\nThis script's purpose is just simply install Microsoft's VS Code Easily...\n\nRead Microsoft's License about VS Code in here:\nhttps://code.visualstudio.com/license?lang=en" 0 0
+            dialog --backtitle "About" --title "VS Code Installer About" --msgbox "VS Code Package Manager by SUFandom\n\nVersion 1.1\n\nThis script's purpose is just simply install Microsoft's VS Code Easily...\n\nRead Microsoft's License about VS Code in here:\nhttps://code.visualstudio.com/license?lang=en\n\nWHATS NEW:\n- Support for three Architectures (armhf, arm64, x86_64)" 0 0
             menu 
             ;;
     esac
