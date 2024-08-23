@@ -17,7 +17,11 @@ Badges
 
 <!-- ![img1_gif](img/1.gif) -->
 
-<video src="img/2024-08-23 16-04-47.mp4" controls></video>
+Video:
+
+<video src="https://github.com/SUFandom/vs-install/raw/main/img/2024-08-23%2016-04-47.mp4" controls></video>
+
+*if you can't see the video, please click [this](img/2024-08-23%2016-04-47.mp4) instead*
 
 And no browser is required, just:
 
