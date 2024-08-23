@@ -11,35 +11,38 @@ This repo is always transparent when handling sensitive data, which is the sudo 
 This is the line code that implement such:
 
 ``` 
-if [ "$(/usr/bin/id -u)" -ne 0 ]; then
-    dialog --backtitle "Error" --title "Cannot Continue without SuperUser" --msgbox "The script cannot run under user session\n\nThis script requires root access to continue..." 0 0
-    password=$(dialog --backtitle "Enter Password" \
-                        --title "Enter sudo Password" \
-                        --clear \
-                        --passwordbox "Enter sudo password, all input texts are invisible for security reasons\n\nSee Security.md for more info, if it's wrong, the script wont launch again" 0 0 \
-                        2>&1 >/dev/tty)
-    grab=$?
-        case $grab in 
-            1)
-                unset password # Security reasons
-                exit 1
-                ;;
-        esac 
-    echo "$password" | sudo -S "$0" "$@"
-    grab=$?
-        case $grab in
-            1)
-                clear
-                unset password
-                echo "Wrong Password, relaunch again, at least with sudo main.sh to avoid this"
-                echo "If you have already launched this sucessfully, then that means its ok. Im currently trying to figure out this"
-                exit $grab 
-                ;;
-        esac 
-    exit 0
-fi 
 
-unset password
+if [ "$(/usr/bin/id -u)" -ne 0 ]; then
+    dialog --backtitle "Error!" --title "Cannot continue without superuser privileges..." --msgbox "The script can't run under userspace session \n\nThis script requires root access to continue..." 0 0
+    pass=$(dialog --backtitle "Enter Password" \
+                    --title "Enter Superuser password" \
+                    --clear \
+                    --passwordbox "Enter Superuser password, all input texts are invisible for security purposes.\n\nSee Security.md for more info, if it's wrong, then the script wont launch again.\n\nWARNING: If you are done installing or removing vs code via this script, do exit by pressing Ctrl+C since you are running this on userspace, jic." 0 0 \
+                    2>&1 >/dev/tty)
+    exstats=$?
+    case $exstats in
+        1)
+            unset pass
+            exit 1
+            ;;
+    esac
+    echo "$pass" | sudo -S "$0" "$@"
+    status=$?
+    case $status in
+        1)
+            clear
+            unset pass # Unset Pass jic
+            echo "Wrong Password, please launch the code again with superuser privileges again to never get the issue..."
+            echo "ONLY if the script really stopped without going to main menu." 
+            echo "because sometimes sudo sends code 1 even tho its now running on sudo mode"
+            echo "Unless if you actually ran the script and installed or uninstalled vs code fine then"
+            echo "that means this error is a fallback and just disregard it"
+            ;;
+    esac
+fi
+
+# JUST TO MAKE SUUUURE
+unset pass
 ```
 
 As you can see, the binary software that i used is dialog, a TUI Software that may not require a windowing session except if its launched on Terminal Emulators
