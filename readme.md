@@ -1,4 +1,5 @@
-# VS Install
+# Visual Studio Code Installer for Debian/Ubuntu
+
 
 Install VS Code Easily by cloning this repo
 
@@ -14,7 +15,9 @@ Badges
 
 **VS-Install's Purpose is to make VS Code Install Easy and only in terminal session**
 
-![img1_gif](img/1.gif)
+<!-- ![img1_gif](img/1.gif) -->
+
+<video src="img/2024-08-23 16-04-47.mp4" controls></video>
 
 And no browser is required, just:
 
