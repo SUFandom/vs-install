@@ -43,6 +43,6 @@ and there you go!
 
 ## Issues
 
-- The Current issue of this repo is that, this only works on Linux Debian/Ubuntu and only supports amd64/x86_64 at the moment
+- The Current issue of this repo is that, this only works on Linux Debian/Ubuntu and only supports `amd64/x86_64`, `ARMHF` and `ARM64` at the moment
 
 - The Script Brodcast some Error even tho the Sudo password was right
