@@ -5,7 +5,7 @@ Install VS Code Easily by cloning this repo
 
 Badges
 
-[![github-forks](https://img.shields.io/github/forks/SUFandom/vs-install?label=Fork&style=appveyor&logo=github)](https://github.com/SUFandom/vs-install) [![github-stars](https://img.shields.io/github/stars/SUFandom/vs-install?style=appveyor&logo=github)](https://github.com/SUFandom/vs-install) ![vsi](https://img.shields.io/badge/VS--Code--Version-1.81-BrightGreen)
+[![github-forks](https://img.shields.io/github/forks/SUFandom/vs-install?label=Fork&style=appveyor&logo=github)](https://github.com/SUFandom/vs-install) [![github-stars](https://img.shields.io/github/stars/SUFandom/vs-install?style=appveyor&logo=github)](https://github.com/SUFandom/vs-install) ![vsi](https://img.shields.io/badge/VS--Code--Version-1.92.2-BrightGreen)
 
 ---
 
