@@ -4,7 +4,7 @@
 
 This page is dedicated on the technical use case of SuperUser password Handling
 
-If you don't like it, then please don't use the repo, for better solution
+If you don't like it, then run the code as sudo first for better security
 
 This repo is always transparent when handling sensitive data, which is the sudo password
 
