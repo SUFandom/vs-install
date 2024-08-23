@@ -15,6 +15,19 @@ else
     AR="false"
 fi
 
+if [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
+    echo "$BACK_T"
+    echo "Usage:"
+    echo "./main.sh <arg>"
+    echo ""
+    echo "Arguments:"
+    echo "--help -h     Shows help"
+    echo "--autoremove  Enables autoremove on apt (this works only"
+    echo "              if you are trying to uninstall vs code)"
+    echo ""
+    exit
+fi
+
 # Arch checking
 case $(uname -m) in 
     "x86_64")
